@@ -8,7 +8,7 @@ const heading = {
   2: "Add your shipping address",
   3: "Choose your payment mode",
   4: "Your item delivered",
-  5: "finished",
+  5: "Finished",
 };
 let step = 1;
 nextBtn.onclick = function (e) {
@@ -19,6 +19,7 @@ nextBtn.onclick = function (e) {
     stepNum.innerHTML = "&#10003;";
     progressBar.style.width = width + 33.33 + "%";
     headingContainer.textContent = heading[++step];
+    nextBtn.disabled = true;
   }
   if (step < 4) {
     if (width == "0%") {
@@ -35,6 +36,7 @@ nextBtn.onclick = function (e) {
     stepNum = document.querySelector(`#step${step}`);
     stepNum.className = "active";
   }
+  clearBtn.disabled = false;
 };
 
 clearBtn.onclick = function (e) {
@@ -60,4 +62,8 @@ clearBtn.onclick = function (e) {
     stepNum.textContent = step;
     stepNum.className = "active";
   }
+  if (step == 1) {
+    clearBtn.disabled = true;
+  }
+  nextBtn.disabled = false;
 };
