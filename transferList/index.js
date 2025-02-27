@@ -21,35 +21,32 @@ function enableButtons() {
   }
 }
 
-function moveToLeft(event) {
-  const selectedEle = document.querySelectorAll(".right input:checked");
+function moveItems(fromSelector, toSection, all = false) {
+  const selectedEle = document.querySelectorAll(
+    `${fromSelector} input${all ? "" : ":checked"}`
+  );
   selectedEle.forEach((elem) => {
-    elem.checked = false;
-    let parentElement = elem.parentElement;
-    leftSection.appendChild(parentElement);
+    if (!all) {
+      elem.checked = false;
+    }
+    toSection.appendChild(elem.parentElement);
   });
 }
-function moveToRight(event) {
-  const selectedEle = document.querySelectorAll(".left input:checked");
-  selectedEle.forEach((elem) => {
-    elem.checked = false;
-    let parentElement = elem.parentElement;
-    rightSection.appendChild(parentElement);
-  });
+
+function moveToLeft() {
+  moveItems(".right", leftSection);
 }
-function moveAllToLeft(event) {
-  const selectedEle = document.querySelectorAll(".right input");
-  selectedEle.forEach((elem) => {
-    let parentElement = elem.parentElement;
-    leftSection.appendChild(parentElement);
-  });
+
+function moveToRight() {
+  moveItems(".left", rightSection);
 }
-function moveAllToRight(event) {
-  const selectedEle = document.querySelectorAll(".left input");
-  selectedEle.forEach((elem) => {
-    let parentElement = elem.parentElement;
-    rightSection.appendChild(parentElement);
-  });
+
+function moveAllToLeft() {
+  moveItems(".right", leftSection, true);
+}
+
+function moveAllToRight() {
+  moveItems(".left", rightSection, true);
 }
 
 moveLeft.addEventListener("click", moveToLeft);
