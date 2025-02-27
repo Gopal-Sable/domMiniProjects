@@ -5,20 +5,24 @@ const moveAllRight = document.querySelector(".move-all-right");
 const moveLeft = document.querySelector(".move-left");
 const moveRight = document.querySelector(".move-right");
 
+function makeEnableDisable(element, btn) {
+  if (element) {
+    btn.removeAttribute("disabled");
+  } else {
+    btn.setAttribute("disabled", "");
+  }
+}
 function enableButtons() {
   const leftCheked = document.querySelector(".left input:checked");
-  if (leftCheked) {
-    moveRight.removeAttribute("disabled");
-  } else {
-    moveRight.setAttribute("disabled", "");
-  }
+  makeEnableDisable(leftCheked, moveRight);
 
   const rightChecked = document.querySelector(".right input:checked");
-  if (rightChecked) {
-    moveLeft.removeAttribute("disabled");
-  } else {
-    moveLeft.setAttribute("disabled", "");
-  }
+  makeEnableDisable(rightChecked, moveLeft);
+
+  const allRights = document.querySelector(".right input");
+  makeEnableDisable(allRights, moveAllLeft);
+  const allLefts = document.querySelector(".left input");
+  makeEnableDisable(allLefts, moveAllRight);
 }
 
 function moveItems(fromSelector, toSection, all = false) {
