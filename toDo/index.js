@@ -1,14 +1,14 @@
 const inputBox = document.querySelector("#inputBox");
 const ulElem = document.querySelector("ul");
-let listArr = [];
-function getInput(event) {
+let todoList = [];
+function handleInput(event) {
   let name = event.target.value;
   if (event.keyCode == 13 && name != "") {
     let todo = {
       name,
       isDone: false,
     };
-    listArr.push(todo);
+    todoList.push(todo);
     event.target.value = "";
     updateUI();
   }
@@ -16,7 +16,7 @@ function getInput(event) {
 
 function updateUI() {
   ulElem.innerHTML = "";
-  listArr.forEach(({ name, isDone }, idx) => {
+  todoList.forEach(({ name, isDone }, idx) => {
     ulElem.appendChild(createListElement(idx, name, isDone));
   });
 }
@@ -37,7 +37,7 @@ function createListElement(idx, name, isDone) {
   return liEle;
 }
 
-function handleClick(e) {
+function handleActions(e) {
   if (e.target.tagName == "SPAN") {
     deleteItem(e);
   } else if (e.target.tagName == "INPUT" && e.target.type == "checkbox") {
@@ -46,14 +46,13 @@ function handleClick(e) {
 }
 function deleteItem(e) {
   let id = e.target.parentElement.id;
-  listArr.splice(id, 1);
+  todoList.splice(id, 1);
   updateUI();
 }
 function checkIsDone(e) {
   let id = e.target.parentElement.id;
-  listArr[id].isDone = e.target.checked;
+  todoList[id].isDone = e.target.checked;
 }
 
-inputBox.addEventListener("keyup", getInput);
-
-ulElem.addEventListener("click", handleClick);
+inputBox.addEventListener("keyup", handleInput);
+ulElem.addEventListener("click", handleActions);
