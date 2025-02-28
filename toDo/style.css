@@ -1,0 +1,43 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  display: flex;
+  justify-content: center;
+  background-color: pink;
+}
+.container {
+  margin-top: 50px;
+  font-size: 20px;
+  text-align: center;
+  padding: 15px;
+  
+  background-color: aliceblue;
+}
+#inputBox {
+  margin: 10px 0px;
+  width: 300px;
+  height: 30px;
+  font-size: large;
+}
+li {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+  margin: 12px 5px;
+  padding: 10px;
+  border-bottom: 1px solid #d6d0d0;
+}
+
+span {
+  color: red;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked + p {
+  text-decoration: line-through;
+  color: #d6d0d0;
+}
